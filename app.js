@@ -110,3 +110,103 @@ productButton.addEventListener("click", () => {
 close.addEventListener("click", () => {
   payment.style.display = "none";
 });
+
+const cart = [];
+const cartCount = document.getElementById("cart-count");
+
+function updateCartUI() {
+  cartCount.textContent = cart.length;
+}
+
+const AddButton = document.querySelector(".AddButton");
+AddButton.addEventListener("click", () => {
+  const selectedColor = document.querySelector(".color.selected");
+  const selectedSize = document.querySelector(".size.selected");
+
+  if (selectedColor && selectedSize) {
+    const cartItem = {
+      id: choosenProduct.id,
+      title: choosenProduct.title,
+      price: choosenProduct.price,
+      color: selectedColor.style.backgroundColor,
+      size: selectedSize.textContent,
+    };
+
+    cart.push(cartItem);
+    updateCartUI();
+  } else {
+    alert("Please select a color and size before adding to cart.");
+  }
+});
+
+
+const Cart = document.querySelector(".Cart");
+Cart.addEventListener("click", () => {
+  let totalPrice = 0;
+  let cartItems = "";
+  cart.forEach(item => {
+    cartItems += `${item.title} - $${item.price.toFixed(2)}<br>`;
+    totalPrice += item.price;
+  });
+  if (cart.length === 0) {
+    cartItems = "Your cart is empty";
+  }
+  const payment = document.querySelector(".payment");
+  payment.innerHTML = `
+    <h1>Your Cart</h1>
+    ${cartItems}
+    <p>Total Price: $${totalPrice.toFixed(2)}</p>
+    <button class="payButton" id="checkoutButton">Checkout</button>
+    <span class="close">X</span>
+  `;
+  payment.style.display = "flex";
+
+  const checkoutButton = document.getElementById("checkoutButton");
+  checkoutButton.addEventListener("click", () => {
+    // Hide the cart popup
+    payment.style.display = "none";
+
+    // Show the payment section
+    const cardPayment = document.querySelector(".payment");
+    cardPayment.innerHTML = `
+      <h1>Card Payment</h1>
+      <label>Name and Surname</label>
+      <input type="text" placeholder="John Doe" class="payInput">
+      <label>Phone Number</label>
+      <input type="text" placeholder="+1 234 5678" class="payInput">
+      <label>Address</label>
+      <input type="text" placeholder="Elton St 21 22-145" class="payInput">
+      <h1>Card Information</h1>
+      <div class="cardIcons">
+        <img src="PAGINA WEB 2/visa.png" width="40" alt="" class="cardIcon">
+        <img src="PAGINA WEB 2/master.png" alt="" width="40" class="cardIcon">
+      </div>
+      <input type="password" class="payInput" placeholder="Card Number">
+      <div class="cardInfo">
+        <input type="text" placeholder="mm" class="payInput sm">
+        <input type="text" placeholder="yyyy" class="payInput sm">
+        <input type="text" placeholder="cvv" class="payInput sm">
+      </div>
+      <button class="payButton">Pay Now!</button>
+      <span class="close">X</span>
+    `;
+    cardPayment.style.display = "flex";
+
+    const payButton = document.querySelector(".payButton");
+    payButton.addEventListener("click", () => {
+      // Implement payment logic here
+      alert("Implement payment logic here");
+    });
+
+    const close = document.querySelector(".close");
+    close.addEventListener("click", () => {
+      cardPayment.style.display = "none";
+    });
+  });
+
+  const close = document.querySelector(".close");
+  close.addEventListener("click", () => {
+    payment.style.display = "none";
+  });
+});
+
