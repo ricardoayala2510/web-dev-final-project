@@ -1,5 +1,8 @@
 # Use a small, lightweight image of Nginx to serve your static files
-FROM nginx:alpine
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get -y install nginx
 
 # Copy the contents of your project's 'src' directory to Nginx's default public HTML directory
 COPY src/ /usr/share/nginx/html
