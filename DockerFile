@@ -10,5 +10,6 @@ COPY src/ /var/www/html
 # Expose the default port for Nginx (usually port 80)
 EXPOSE 80
 
+
 # Command to start Nginx when the container starts
 CMD ["nginx", "-g", "daemon off;"]
