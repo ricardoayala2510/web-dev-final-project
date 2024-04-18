@@ -243,3 +243,36 @@ Cartbutton.addEventListener("click", () => {
     payment.style.display = "none";
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('myAudio');
+  audio.volume = 0.03; // Set volume to minimum (0.03)
+  
+  var cartButton = document.querySelector('.Cartbutton');
+  var addButton = document.querySelector('.AddButton');
+  var buyButton = document.querySelector('.buyButton');
+
+  cartButton.addEventListener('click', function() {
+      audio.play(); // Play the audio when Cart button is clicked
+  });
+  addButton.addEventListener('click', function() {
+      audio.play(); // Play the audio when Add to Cart button is clicked
+  });
+  buyButton.addEventListener('click', function() {
+      audio.play(); // Play the audio when Buy Now button is clicked
+  });
+
+  // Save the flag to localStorage when the audio is played or paused
+  audio.addEventListener('play', function() {
+      localStorage.setItem('shouldPlay', 'true');
+  });
+  audio.addEventListener('pause', function() {
+      localStorage.setItem('shouldPlay', 'false');
+  });
+
+  // Check if the audio should be playing based on the localStorage flag
+  var shouldPlay = localStorage.getItem('shouldPlay');
+  if (shouldPlay === 'true') {
+      audio.play(); // Play the audio if the flag is set to true
+  }
+});
