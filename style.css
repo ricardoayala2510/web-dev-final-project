@@ -1,3 +1,9 @@
+:root {
+  --primary-color: black;
+  --secondary-color: lightgray;
+  --background-color: whitesmoke;
+}
+
 html{
   scroll-behavior: smooth;
 }
@@ -8,8 +14,8 @@ body {
 }
 
 nav {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
+  background-color: var(--primary-color);
+  color: var(--background-color);
   padding: 20px 50px;
 }
 
@@ -22,7 +28,7 @@ nav {
 .seach {
   display: flex;
   align-items: center;
-  background-color: gray;
+  background-color: var(--secondary-color);
   padding: 10px 20px;
   border-radius: 10px;
 }
@@ -97,7 +103,7 @@ overflow: hidden;
   top: 13%;
   left: 50%;
   text-align: center;
-  border: 1px solid gray;
+  border: 1px solid var(--secondary-color);
 }
 .buyButton {
     position: absolute;
@@ -106,8 +112,8 @@ overflow: hidden;
     font-weight: 900;
     top: 90%;
     right: 5%;
-    border: 1px solid gray;
-    background-color: black;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
     cursor: pointer;
 }
 
@@ -117,7 +123,7 @@ overflow: hidden;
   color: black;
 }
 
-
+ 
 .features {
   display: flex;
   align-items: center;
@@ -437,4 +443,31 @@ footer {
   font-size: 14px;
 }
 
+section {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+}
 
+article {
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 0;
+
+  bottom: 0;
+  width: 100%;
+}
+a{
+  text-decoration: none;
+  color: gray;
+}

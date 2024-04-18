@@ -276,3 +276,21 @@ document.addEventListener('DOMContentLoaded', function() {
       audio.play(); // Play the audio if the flag is set to true
   }
 });
+
+const searchInput = document.querySelector(".searchImput");
+
+searchInput.addEventListener("input", () => {
+  const searchText = searchInput.value.toLowerCase();
+  const index = products.findIndex(product => product.title.toLowerCase().includes(searchText));
+  if (index !== -1) {
+    wrapper.style.transform = `translateX(${-100 * index}vw)`;
+    choosenProduct = products[index];
+    currentProductTitle.textContent = choosenProduct.title;
+    currentProductPrice.textContent = "$" + choosenProduct.price;
+    currentProductImg.src = choosenProduct.colors[0].img;
+    currentProductColors.forEach((color, index) => {
+      color.style.backgroundColor = choosenProduct.colors[index].code;
+    });
+  }
+});
+
