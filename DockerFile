@@ -1,15 +1,11 @@
-bashCopy code
-# Use the official Node.js image as the base image
-FROM node:18
+# Use a small, lightweight image of Nginx to serve your static files
+FROM nginx:alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# Copy the contents of your project's 'src' directory to Nginx's default public HTML directory
+COPY src/ /usr/share/nginx/html
 
-# Copy the application files into the working directory
-COPY . /app
+# Expose the default port for Nginx (usually port 80)
+EXPOSE 80
 
-# Install the application dependencies
-RUN npm install
-
-# Define the entry point for the container
-CMD ["npm", "start"]
+# Command to start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]
