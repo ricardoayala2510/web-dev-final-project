@@ -5,31 +5,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet"
     />
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="app.js"></script>
+
     <title>Dionysus</title>
-  </head>
-  <body>
+</head>
+<body>
     <nav>
-       <div class="navTop">
-          <div class="logo"> 
-            <img src="PAGINA WEB 2/logo.jpg" width="100" height="100" alt="">
-          </div>
-          <div class="navItem">
-            <div class="seach">
-                <input type="text" placeholder="search..." class="searchImput">
-                <img src="PAGINA WEB 2/search.svg" width="20" height="20"  alt="" class="searchicon">
+        <div class="navTop">
+            <div class="logo"> 
+                <img src="PAGINA WEB 2/logo.jpg" width="100" height="100" alt="">
             </div>
-          </div>
-          <div class="navItem">
-            <span class="Cart"> Cart (<span id="cart-count">0</span>)</span>
-          </div>
-       </div> 
-       <div class="navBottom">
-     <h4 class="menuItem">DIONYSUS</h4>
-     <div class="centro">
+            <div class="navItem">
+                <div class="seach">
+                    <input type="text" placeholder="search..." class="searchImput">
+                    <img src="PAGINA WEB 2/search.svg" width="20" height="20"  alt="" class="searchicon">
+                </div>
+            </div>
+            <div class="navItem">
+                <button class="Cartbutton"> Cart (<span id="cart-count">0</span>)</button>
+                <div class="cart">
+                </div>
+            </div>
+        </div> 
+        <div class="navBottom">
+            <h4 class="menuItem">DIONYSUS</h4>
+            <div class="centro">
        <h4 class="menuItem" id="a">ONE MORE REP</h4> 
 
      </div>
@@ -105,8 +109,8 @@
               dolorum
               doloremque sapiente aliquid aperiam.</p>
           <div class="colors">
-              <div class="color"></div>
-              <div class="color"></div>
+              <div class="color" id="product-1-Black"></div>
+              <div class="color" id="product-1-White"></div>
           </div>
           <div class="sizes">
               <div class="size">S</div>
@@ -139,6 +143,11 @@
         <button class="payButton">Checkout!</button>
         <span class="close">X</span>
     </div>
+    <div class="cart">
+      <h1>Products</h1>
+        <button class="payButton">Checkout!</button>
+        <span class="close">X</span>
+    </div> 
 </div>
 <footer>
   <div class="footerLeft">
@@ -192,6 +201,7 @@
       </div>
   </div>
 </footer>
-    <script src="app.js"></script>
   </body>
+  <script type="module" src="domain.js"></script>
+  <script type="module" src="ui.js"></script>
 </html>

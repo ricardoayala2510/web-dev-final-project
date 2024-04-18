@@ -1,5 +1,4 @@
 const wrapper = document.querySelector(".sliderWrapper");
-
 const menuItems = document.querySelectorAll(".menuItem");
 
 const products = [
@@ -14,7 +13,7 @@ const products = [
       },
       {
         code: "White",
-        img: "PAGINA WEB 2/DIONYSUS BLANCO.png",
+        img: "PAGINA WEB 2/DIONYSUS BLANCA.png",
       },
     ],
   },
@@ -24,12 +23,12 @@ const products = [
     price: 9.99,
     colors: [
       {
-        code: "White",
-        img: "PAGINA WEB 2/ONE MORE REP BLANCA.png",
-      },
-      {
         code: "Black",
         img: "PAGINA WEB 2/ONE MORE REP NEGRA.png",
+      },
+      {
+        code: "White",
+        img: "PAGINA WEB 2/ONE MORE REP BLANCA.png",
       },
     ],
   },
@@ -39,16 +38,12 @@ const products = [
     price: 9.99,
     colors: [
       {
-        code: "White",
-        img: "PAGINA WEB 2/THE WORLD IS OURS BKANCO.png",
-      },
-      {
         code: "Black",
         img: "PAGINA WEB 2/THE WORLD IS OURS NEGRA.png",
       },
       {
-        code: "Blue",
-        img: "PAGINA WEB 2/THE WORLD IS OURS NEGRA AZUL.png",
+        code: "White",
+        img: "PAGINA WEB 2/THE WORLD IS OURS BKANCO.png",
       },
     ],
   },
@@ -59,7 +54,11 @@ let choosenProduct = products[0];
 const currentProductImg = document.querySelector(".productImg");
 const currentProductTitle = document.querySelector(".productTitle");
 const currentProductPrice = document.querySelector(".productPrice");
-const currentProductColors = document.querySelectorAll(".color");
+const currentProductColors = choosenProduct.colors.map(color => {
+  const colorElementId = `product-${choosenProduct.id}-${color.code}`
+  const colorElement = document.getElementById(colorElementId);
+  return colorElement;
+}) 
 const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
@@ -85,11 +84,16 @@ menuItems.forEach((item, index) => {
 currentProductColors.forEach((color, index) => {
   color.addEventListener("click", () => {
     currentProductImg.src = choosenProduct.colors[index].img;
+    currentProductColors.forEach(c => c.classList.remove("selected"));
+    color.classList.add("selected");
   });
 });
 
+let choosenSize = null; // Definir choosenSize como nulo al principio
+
 currentProductSizes.forEach((size, index) => {
   size.addEventListener("click", () => {
+    choosenSize = size.textContent; // Asignar el tamaño seleccionado a choosenSize
     currentProductSizes.forEach((size) => {
       size.style.backgroundColor = "white";
       size.style.color = "black";
@@ -111,47 +115,77 @@ close.addEventListener("click", () => {
   payment.style.display = "none";
 });
 
-const cart = [];
+const addToCartButton = document.querySelector(".AddButton");
 const cartCount = document.getElementById("cart-count");
+const cartContainer = document.querySelector(".cart");
+const cartToggle = document.querySelector(".Cart");
+const cart = []; // Array to store added items
 
-function updateCartUI() {
-  cartCount.textContent = cart.length;
-}
-
-const AddButton = document.querySelector(".AddButton");
-AddButton.addEventListener("click", () => {
-  const selectedColor = document.querySelector(".color.selected");
-  const selectedSize = document.querySelector(".size.selected");
-
-  if (selectedColor && selectedSize) {
-    const cartItem = {
-      id: choosenProduct.id,
-      title: choosenProduct.title,
-      price: choosenProduct.price,
-      color: selectedColor.style.backgroundColor,
-      size: selectedSize.textContent,
-    };
-
-    cart.push(cartItem);
-    updateCartUI();
+cartToggle.addEventListener("click", () => {
+  if (cartContainer.style.display === "none" || cartContainer.style.display === "") {
+    cartContainer.style.display = "block";
   } else {
-    alert("Please select a color and size before adding to cart.");
+    cartContainer.style.display = "none";
   }
 });
 
+addToCartButton.addEventListener("click", () => {
+  if (!choosenSize) {
+    alert("Please select a size.");
+    return;
+  }
 
-const Cart = document.querySelector(".Cart");
-Cart.addEventListener("click", () => {
+  const selectedColorElement = document.querySelector(".color.selected");
+  const selectedColorCode = selectedColorElement.id.split("-")[2];
+
+  const selectedProduct = {
+    title: choosenProduct.title,
+    color: selectedColorCode,
+    size: choosenSize,
+    price: choosenProduct.price,
+  };
+
+  cart.push(selectedProduct);
+  cartCount.textContent = cart.length; // Update cart count
+
+  // Create a new div element for the selected product
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+  cartItem.innerHTML = `
+    <img src="PAGINA WEB 2/${choosenProduct.title.replace(/\s/g, "-").toLowerCase()}-${selectedProduct.color.toLowerCase()}.png" alt="${choosenProduct.title} (${selectedProduct.color})">
+    <div class="cart-item-details">
+      <h3>${choosenProduct.title} - ${selectedProduct.color}</h3>
+      <p>Size: ${selectedProduct.size}</p>
+      <p>Price: $${selectedProduct.price.toFixed(2)}</p>
+    </div>
+  `;
+
+  // Append the cart item to the cart container
+  cartContainer.appendChild(cartItem);
+  alert("products added")
+  console.log("Added to cart:", selectedProduct);
+});
+
+const Cartbutton = document.querySelector(".Cartbutton");
+Cartbutton.addEventListener("click", () => {
   let totalPrice = 0;
   let cartItems = "";
   cart.forEach(item => {
-    cartItems += `${item.title} - $${item.price.toFixed(2)}<br>`;
+    cartItems += `
+      <div class="cart-item">
+        <img src=".productImg">
+        <div class="cart-item-details">
+          <h3>${item.title} - ${item.color}</h3>
+          <p>Size: ${item.size}</p>
+          <p>Price: $${item.price.toFixed(2)}</p>
+        </div>
+      </div>
+    `;
     totalPrice += item.price;
   });
   if (cart.length === 0) {
     cartItems = "Your cart is empty";
-  }
-  const payment = document.querySelector(".payment");
+  }const payment = document.querySelector(".payment");
   payment.innerHTML = `
     <h1>Your Cart</h1>
     ${cartItems}
@@ -209,4 +243,3 @@ Cart.addEventListener("click", () => {
     payment.style.display = "none";
   });
 });
-

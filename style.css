@@ -36,11 +36,6 @@ nav {
   color: lightgray;
 }
 
-.Cart {
-  font-size: 20px;
-  border-bottom: 2px solid green;
-  cursor: pointer;
-}
 
 .navBottom {
   display: flex;
@@ -189,6 +184,8 @@ overflow: hidden;
   margin-bottom: 20px;
 }
 
+
+
 .color {
   width: 32px;
   height: 32px;
@@ -298,7 +295,7 @@ label {
 .payButton {
   position: absolute;
   height: 45px;
-  bottom: -70;
+  bottom: -90;
   width: 100%;
   left: 0;
   -webkit-box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
@@ -323,6 +320,57 @@ label {
   cursor: pointer;
   padding: 2px;
 }
+
+
+.Cartbutton {
+  font-size: 20px;
+  border-bottom: 2px solid green;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.cart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+  display: none; 
+}
+
+.cart h1 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.cart .payButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.cart .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+  
+}
+
+
 footer {
   display: flex;
 }
@@ -381,6 +429,8 @@ footer {
   font-weight: 300;
   font-size: 14px;
 }
+
+
 
 
 @media screen and (max-width:480px) {
