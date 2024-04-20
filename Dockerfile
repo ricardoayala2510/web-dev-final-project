@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get -y install nginx
 
 # Copy the contents of your project's 'src' directory to Nginx's default public HTML directory
-COPY src 
+COPY src /var/www/html
 
 # Expose the default port for Nginx (usually port 80)
 EXPOSE 80
