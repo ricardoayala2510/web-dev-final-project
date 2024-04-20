@@ -203,26 +203,30 @@ Cartbutton.addEventListener("click", () => {
     // Show the payment section
     const cardPayment = document.querySelector(".payment");
     cardPayment.innerHTML = `
-      <h1>Card Payment</h1>
-      <label>Name and Surname</label>
-      <input type="text" placeholder="John Doe" class="payInput">
-      <label>Phone Number</label>
-      <input type="text" placeholder="+1 234 5678" class="payInput">
-      <label>Address</label>
-      <input type="text" placeholder="Elton St 21 22-145" class="payInput">
-      <h1>Card Information</h1>
-      <div class="cardIcons">
-        <img src="PAGINA WEB 2/visa.png" width="40" alt="" class="cardIcon">
-        <img src="PAGINA WEB 2/master.png" alt="" width="40" class="cardIcon">
-      </div>
-      <input type="password" class="payInput" placeholder="Card Number">
-      <div class="cardInfo">
-        <input type="text" placeholder="mm" class="payInput sm">
-        <input type="text" placeholder="yyyy" class="payInput sm">
-        <input type="text" placeholder="cvv" class="payInput sm">
-      </div>
-      <button class="payButton">Pay Now!</button>
-      <span class="close">X</span>
+    <form id="paymentForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email-address" required />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="tel" id="amount" required />
+        </div>
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" />
+        </div>
+        <div class="form-submit">
+          <button type="submit" onclick="payWithPaystack()"> Pay </button>
+        </div>
+      </form>
+      <script src="https://js.paystack.co/v1/inline.js"></script>
+    <button class="payButton">Checkout!</button>
+    <span class="close">X</span>
     `;
     cardPayment.style.display = "flex";
 
